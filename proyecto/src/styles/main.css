@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@keyframes bubbleUp {
+  0% {
+    transform: translateY(100vh) scale(0.7);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1);
+    opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  bottom: 0;
+  animation: bubbleUp linear infinite;
+}
+
+.bubble-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(70% 70% at 35% 35%, rgba(255,255,255,.95), rgba(255,255,255,.35) 60%, rgba(255,255,255,.12) 82%, rgba(255,255,255,0) 100%);
+  border: 1px solid rgba(255,255,255,.45);
+  box-shadow: 0 0 14px rgba(255,255,255,.28);
+}
+
+/* ——— Capas parallax (leves) ——— */
+
+/* ——— Marco “burbuja” de las fotos ——— */
+.bubble-frame {
+  border-radius: 9999px;
+  padding: .25rem;
+  background:
+    radial-gradient(120% 120% at 25% 25%, rgba(255,255,255,.75), rgba(255,255,255,.15) 60%, rgba(255,255,255,0) 70%),
+    linear-gradient(145deg, rgba(34,211,238,.5), rgba(168,85,247,.35));
+  box-shadow: 0 8px 30px rgba(0,0,0,.35), inset 0 0 12px rgba(255,255,255,.25);
+}
+
+/* ===== Burbujas tipo maqueta ===== */
+.bubble3{
+  position: relative;
+  border-radius: 50% / 58%;                 /* óvalo alto */
+  padding: 2.4rem 2rem 3.6rem;
+  color: #ffffff;
+  text-align: center;
+  isolation: isolate;
+
+  /* interior lechoso + color violeta/cian muy suave */
+  background:
+    radial-gradient(120% 95% at 30% 20%, rgba(255,255,255,.92), rgba(255,255,255,.30) 45%, rgba(255,255,255,.08) 62%, rgba(255,255,255,0) 72%),
+    radial-gradient(140% 140% at 80% 85%, rgba(34,211,238,.28), rgba(168,85,247,.22) 35%, rgba(0,0,0,0) 70%);
+  backdrop-filter: blur(2px) saturate(1.05);
+
+  /* sombra y “peso” */
+  box-shadow:
+    0 22px 50px rgba(0,0,0,.35),
+    inset 0 0 26px rgba(255,255,255,.18);
+
+  /* flotación leve */
+  animation: bubbleFloat 6.5s ease-in-out infinite;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.bubble3:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 28px 70px rgba(0,0,0,.45), inset 0 0 30px rgba(255,255,255,.2);
+}
+
+/* Borde húmedo (anillo con brillo) */
+.bubble3::before{
+  content:"";
+  position:absolute; inset:-3px; border-radius:inherit; z-index:-1;
+  background:
+    radial-gradient(130% 100% at 30% 20%, rgba(255,255,255,.9), rgba(255,255,255,.35) 35%, rgba(255,255,255,0) 60%),
+    conic-gradient(from 210deg at 70% 25%, rgba(255,255,255,.55), rgba(255,255,255,0) 25%),
+    linear-gradient(140deg, rgba(168,85,247,.45), rgba(34,211,238,.45));
+  filter: saturate(1.1);
+  mask: radial-gradient(100% 85% at 50% 50%, transparent 67%, #000 69%);  /* crea el anillo */
+}
+
+/* brillo superior curvo */
+.bubble3::after{
+  content:"";
+  position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:
+    radial-gradient(55% 22% at 50% 9%, rgba(255,255,255,.18), transparent 70%),
+    radial-gradient(12px 12px at 22% 18%, rgba(255,255,255,.35), transparent 60%),
+    radial-gradient(7px 7px   at 78% 82%, rgba(255,255,255,.2), transparent 60%);
+  mix-blend-mode: screen;
+}
+
+/* tipografías internas */
+.bubble3-title{
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(1.35rem, 1.05rem + 1.2vw, 1.9rem);
+  line-height: 1.15;
+  margin-bottom: .75rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+.bubble3-list{
+  font-style: italic;
+  opacity: .98;
+  display: grid; gap: .25rem;
+  text-shadow: 0 1px 6px rgba(0,0,0,.25);
+}
+.bubble3-ico{
+  position: absolute; inset-inline: 0; bottom: .9rem;
+  font-size: 2rem; opacity: .95;
+}
+
+/* animación de flotación */
+@keyframes bubbleFloat{
+  0%,100%{ transform: translateY(0) }
+  50%    { transform: translateY(-6px) }
+}
+
+@media (min-width: 1024px){
+  .bubble3{ padding: 2.6rem 2.2rem 4rem; }
+  .bubble3-ico{ font-size: 2.2rem; }
+}
+@import "tailwindcss";
+
+/* pill de vidrio con borde suave y sombra */
+.pill{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.75rem 1.5rem; border-radius:9999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.35);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 10px 30px rgba(0,0,0,.35);
+  backdrop-filter: blur(4px) saturate(1.1);
+  transition: all .25s ease;
+}
+.pill:hover{
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.55);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.12),
+    0 16px 40px rgba(0,0,0,.45);
+}
+a:hover svg {
+  transform: translateY(-4px);
+  transition: transform 0.3s ease;
+}
+
